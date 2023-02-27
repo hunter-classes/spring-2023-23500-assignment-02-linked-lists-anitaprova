@@ -13,6 +13,7 @@ int main()
   std::cout << l->contains("z") << "\n";
   
   l->insert(0, "word");
+  l->remove(0);
 
   return 0;
 }

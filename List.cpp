@@ -92,7 +92,15 @@ bool List::contains(std::string s)
 
 void List::remove(int loc)
 {
-  Node *walker, trailer;
+  Node *walker, *trailer;
+  walker = this->head; //start
+  trailer = nullptr; //behind 
+
+  while(loc > 0 && walker != nullptr){
+    loc--;
+    trailer = walker;
+    walker = walker -> getNext();
+  }
 }
 
 std::string List::toString()
