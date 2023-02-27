@@ -7,7 +7,10 @@ List::List()
   head = nullptr;
 }
 
-// insert at the "front" (head)
+List::~List(){
+  delete head;
+}
+
 void List::insert(std::string data)
 {
   Node *tmp = new Node(data);
@@ -15,13 +18,6 @@ void List::insert(std::string data)
   head = tmp;
 }
 
-/*
-  insert at loc
-  We need a pointer to the node BEFORE
-  the location where we want to insert
-
-  Piggybacking
- */
 void List::insert(int loc, std::string data)
 {
   Node *walker, *trailer;
@@ -32,27 +28,16 @@ void List::insert(int loc, std::string data)
   {
     loc = loc - 1;
 
-    /* trailer will always be one node
-       behind walker */
     trailer = walker;
     walker = walker->getNext();
   }
 
-  // At this point, trailer points to the Node
-  // BEFORE where we want to insert
-
-  // test to see if we're trying to
-  // insert past the end
   if (loc > 0)
   {
-    // do something to indicate this is invalid
     throw std::out_of_range("Our insert is out of range");
   }
 
   Node *newNode = new Node(data);
-  // Inserting at true location 0
-  // will have trailer == nullptr
-  // - we have to treat that as a special case
   if (trailer == nullptr)
   {
     newNode->setNext(head);
@@ -66,24 +51,48 @@ void List::insert(int loc, std::string data)
   }
 }
 
-/*
-  Alternate solution:
-    make a private variable to store the length
-    and just return it here.
-
-    Change all the insert/delete/remove type
-    routines to upate that variable
- */
 int List::length()
 {
+  Node *tmp = this->head;
   int count = 0;
-  Node *walker = head;
-  while (walker != nullptr)
+  while (tmp != nullptr)
   {
     count++;
-    walker = walker->getNext();
+    tmp = tmp->getNext();
   }
   return count;
+}
+
+std::string List::get(int loc)
+{
+  Node *tmp = this->head;
+  int i = 0;
+  while(i != loc-1){
+    tmp = tmp->getNext();
+    i++;
+  }
+  return tmp->getData();
+}
+
+bool List::contains(std::string s)
+{
+  Node *tmp = this->head;
+  while (tmp != nullptr)
+  {
+    if (tmp->getData() == s)
+    {
+      return true;
+      break;
+    }
+
+    tmp = tmp->getNext();
+  }
+  return false;
+}
+
+void List::remove(int loc)
+{
+  Node *walker, trailer;
 }
 
 std::string List::toString()
