@@ -7,7 +7,8 @@ List::List()
   head = nullptr;
 }
 
-List::~List(){
+List::~List()
+{
   delete head;
 }
 
@@ -67,7 +68,8 @@ std::string List::get(int loc)
 {
   Node *tmp = this->head;
   int i = 0;
-  while(i != loc-1){
+  while (i != loc - 1)
+  {
     tmp = tmp->getNext();
     i++;
   }
@@ -93,13 +95,23 @@ bool List::contains(std::string s)
 void List::remove(int loc)
 {
   Node *walker, *trailer;
-  walker = this->head; //start
-  trailer = nullptr; //behind 
+  walker = this->head; // start
+  trailer = nullptr;   // behind
 
-  while(loc > 0 && walker != nullptr){
+  while (loc > 0 && walker != nullptr)
+  {
     loc--;
     trailer = walker;
-    walker = walker -> getNext();
+    walker = walker->getNext();
+  }
+
+  if (trailer == nullptr)
+  { // special case
+    head = walker->getNext();
+  }
+  else
+  {
+    trailer->setNext(walker->getNext());
   }
 }
 
