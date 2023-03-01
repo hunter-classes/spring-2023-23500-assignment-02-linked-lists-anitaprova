@@ -22,5 +22,8 @@ int main()
   l->remove(1);
   std::cout << l->toString() << "\n";
 
+  std::cout << "----------------------\n\n";
+  OList *l = new OList();
+
   return 0;
 }

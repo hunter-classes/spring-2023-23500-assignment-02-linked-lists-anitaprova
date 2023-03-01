@@ -19,51 +19,6 @@ void OList::insert(std::string data)
 	head = tmp;
 }
 
-void OList::insert(int loc, std::string data)
-{
-	Node *walker, *trailer;
-	walker = this->head; // start of the list
-	trailer = nullptr;	 // one behind
-
-	while (loc > 0 && walker != nullptr)
-	{
-		loc = loc - 1;
-
-		trailer = walker;
-		walker = walker->getNext();
-	}
-
-	if (loc > 0)
-	{
-		throw std::out_of_range("Our insert is out of range");
-	}
-
-	Node *newNode = new Node(data);
-	if (trailer == nullptr)
-	{
-		newNode->setNext(head);
-		head = newNode;
-	}
-	else
-	{
-		// do the regular case
-		newNode->setNext(walker);
-		trailer->setNext(newNode);
-	}
-}
-
-int OList::length()
-{
-	Node *tmp = this->head;
-	int count = 0;
-	while (tmp != nullptr)
-	{
-		count++;
-		tmp = tmp->getNext();
-	}
-	return count;
-}
-
 std::string OList::get(int loc)
 {
 	Node *tmp = this->head;
@@ -113,6 +68,10 @@ void OList::remove(int loc)
 	{
 		trailer->setNext(walker->getNext());
 	}
+}
+
+void OList::reverse()
+{
 }
 
 std::string OList::toString()
