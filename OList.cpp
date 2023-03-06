@@ -9,24 +9,48 @@ OList::OList()
 
 OList::~OList()
 {
-	delete head;
+	Node *walker = head;
+	Node *trailer = nullptr;
+	while (walker != nullptr)
+	{
+		trailer = walker;
+		walker = walker->getNext();
+		delete trailer;
+	}
 }
 
-void OList::insert(std::string data)
+void OList::insert(std::string data) // need to fix
 {
+	Node *walker, *trailer;
 	Node *tmp = new Node(data);
-	tmp->setNext(head);
-	head = tmp;
+	walker = head;
+	trailer = nullptr;
+
+	while (walker != nullptr && stoi(data) >= stoi(walker->getData()))
+	{
+		trailer = walker;
+		walker = walker->getNext();
+	}
+
+	if (trailer == nullptr)
+	{
+		tmp->setNext(head);
+		head = tmp;
+	}
+	else
+	{
+		trailer->setNext(tmp);
+		tmp->setNext(walker);
+	}
 }
 
 std::string OList::get(int loc)
 {
 	Node *tmp = this->head;
-	int i = 0;
-	while (i != loc - 1)
+	while (loc != 0)
 	{
 		tmp = tmp->getNext();
-		i++;
+		loc--;
 	}
 	return tmp->getData();
 }
@@ -72,6 +96,15 @@ void OList::remove(int loc)
 
 void OList::reverse()
 {
+	Node *walker, *trailer;
+	walker = this->head; // start
+	trailer = nullptr;	 // behind
+
+	while (walker != nullptr)
+	{
+		trailer = walker;
+		walker = walker->getNext();
+	}
 }
 
 std::string OList::toString()
@@ -84,6 +117,6 @@ std::string OList::toString()
 		result = result + "-->";
 		tmp = tmp->getNext();
 	}
-	result = result + "nullptr";
+	result = result + "nullptr\n";
 	return result;
 }

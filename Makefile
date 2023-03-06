@@ -7,7 +7,7 @@ main: $(OBJECTS)
 tests: tests.o
 	g++ -o tests tests.o
 
-main.o: main.cpp List.h Node.h
+main.o: main.cpp List.h Node.h OList.o
 
 OList.o: OList.cpp Node.h OList.h
 

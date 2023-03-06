@@ -119,6 +119,7 @@ std::string List::toString()
 {
   Node *tmp = this->head;
   std::string result = "";
+  result = result + "head-->";
   while (tmp != nullptr)
   {
     result = result + tmp->getData();

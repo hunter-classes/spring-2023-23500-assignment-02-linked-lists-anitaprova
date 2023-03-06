@@ -4,26 +4,29 @@
 
 int main()
 {
-  List *l = new List();
+  OList *m = new OList();
+  m->insert("0");
+  m->insert("1");
+  m->insert("2");
+  m->insert("3");
+  m->insert("4");
 
-  l->insert(0, "a");
-  l->insert(0, "b");
-  l->insert(0, "c");
-  l->insert(0, "d");
-  std::cout << l->toString() << "\n";
+  std::cout << m->get(0) << "\n";
+  std::cout << m->get(3) << "\n";
 
-  std::cout << l->contains("b") << "\n";
-  std::cout << l->contains("z") << "\n";
+  std::cout << m->contains("5") << "\n";
+  std::cout << m->contains("0") << "\n";
 
-  l->insert(0, "word");
-  std::cout << l->toString() << "\n";
-  l->remove(0);
-  std::cout << l->toString() << "\n";
-  l->remove(1);
-  std::cout << l->toString() << "\n";
+  std::cout << m->toString();
+  m->remove(0);
+  std::cout << m->toString();
 
-  std::cout << "----------------------\n\n";
-  OList *l = new OList();
+  std::cout << m->toString();
+  m->remove(3);
+  std::cout << m->toString();
+
+  m->reverse();
+  std::cout << m->toString();
 
   return 0;
 }
