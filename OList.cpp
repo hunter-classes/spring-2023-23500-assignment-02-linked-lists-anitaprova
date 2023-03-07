@@ -96,15 +96,19 @@ void OList::remove(int loc)
 
 void OList::reverse()
 {
-	Node *walker, *trailer;
-	walker = this->head; // start
+	Node *walker, *trailer, *current;
+	current = head;						// start
+	walker = nullptr; //ahead
 	trailer = nullptr;	 // behind
 
-	while (walker != nullptr)
+	while (current != nullptr)
 	{
-		trailer = walker;
-		walker = walker->getNext();
+		walker = current->getNext();
+		current->setNext(trailer);
+		trailer = current;
+		current = walker;
 	}
+	head = trailer;
 }
 
 std::string OList::toString()
