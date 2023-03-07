@@ -6,15 +6,15 @@
 
 TEST_CASE("insert"){
 	OList *m = new OList();
-	/*m->insert("0");
+	m->insert("0");
 	m->insert("1");
 	m->insert("2");
 	m->insert("3");
 
-	CHECK(m->toString() == "0-->1-->2-->3-->4-->nullptr");*/
+	CHECK(m->toString() == "0-->1-->2-->3-->nullptr");
 }
 
-/*TEST_CASE("get"){
+TEST_CASE("get"){
 	OList *m = new OList();
 }
 
@@ -31,4 +31,4 @@ TEST_CASE("remove")
 TEST_CASE("reverse")
 {
 	OList *m = new OList();
-}*/
+}

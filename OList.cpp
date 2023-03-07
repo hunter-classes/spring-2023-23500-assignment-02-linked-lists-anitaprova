@@ -121,6 +121,6 @@ std::string OList::toString()
 		result = result + "-->";
 		tmp = tmp->getNext();
 	}
-	result = result + "nullptr\n";
+	result = result + "nullptr";
 	return result;
 }
