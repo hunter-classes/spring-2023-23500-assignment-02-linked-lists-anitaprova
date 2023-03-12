@@ -111,6 +111,10 @@ void OList::reverse()
 	head = trailer;
 }
 
+Node* OList::gethead(){
+	return head;
+}
+
 std::string OList::toString()
 {
 	Node *tmp = this->head;

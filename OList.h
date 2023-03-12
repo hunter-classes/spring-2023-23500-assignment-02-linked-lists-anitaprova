@@ -15,5 +15,6 @@ public:
 	bool contains(std::string s);
 	void remove(int loc);
 	void reverse();
+	Node *gethead();
 	std::string toString();
 };
