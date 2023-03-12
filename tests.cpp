@@ -4,6 +4,22 @@
 #include "OList.h"
 #include <string>
 
+TEST_CASE("constructor")
+{
+	OList *m = new OList();
+	CHECK(m->gethead() == nullptr);
+}
+
+TEST_CASE("deconstructor")
+{
+	OList *m = new OList();
+	m->insert("0");
+	m->insert("1");
+	delete m;		 // cannot reference this anymore
+	m = nullptr; // already deleted so it is good practice to point to nullptr
+	CHECK(m == nullptr);
+}
+
 TEST_CASE("insert")
 {
 	OList *m = new OList();
@@ -31,6 +47,10 @@ TEST_CASE("get")
 	CHECK(m->get(0) == "12");
 	CHECK(m->get(1) == "66");
 	CHECK(m->get(2) == "89");
+
+	m->remove(1);
+	CHECK(m->get(0) == "12");
+	CHECK(m->get(1) == "89");
 }
 
 TEST_CASE("contains")
@@ -45,6 +65,7 @@ TEST_CASE("contains")
 	CHECK(m->contains("89") == 1);
 	CHECK(m->contains("52") == 1);
 	CHECK(m->contains("200") == 0);
+	CHECK(m->contains("0") == 0);
 }
 
 TEST_CASE("remove")
@@ -62,6 +83,16 @@ TEST_CASE("remove")
 	CHECK(m->toString() == "52-->66-->nullptr");
 }
 
+TEST_CASE("tostring")
+{
+	OList *m = new OList();
+	m->insert("36");
+	CHECK(m->toString() == "36-->nullptr");
+
+	m->insert("2000");
+	CHECK(m->toString() == "36-->2000-->nullptr");
+}
+
 TEST_CASE("reverse")
 {
 	OList *reverse = new OList();
@@ -72,4 +103,7 @@ TEST_CASE("reverse")
 
 	reverse->reverse();
 	CHECK(reverse->toString() == "89-->66-->52-->12-->nullptr");
+
+	reverse->reverse();
+	CHECK(reverse->toString() == "12-->52-->66-->89-->nullptr");
 }
